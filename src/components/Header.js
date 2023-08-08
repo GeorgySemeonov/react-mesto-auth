@@ -17,7 +17,7 @@ function Header (props) {
         ) : ( // пользователь не авторизован
           <Routes>
             
-            <Route path='/sign-up' element={<Link to='/sign-in' className="header__menu-item">Вход</Link>}/>
+            <Route path='/sign-up' element={<Link to='/sign-in' className="header__menu-item">Войти</Link>}/>
             
             <Route path='/sign-in' element={<Link to='/sign-up' className="header__menu-item">Регистрация</Link>}/>
           

@@ -34,7 +34,7 @@ function Register (props) {
           <button type="submit" className="auth__button" aria-label="Зарегистрироваться">Зарегистрироваться</button>
         </form>
         <div className='auth__register'>
-          <p>Уже зарегистрированы?</p>
+          <p className="auth__link" >Уже зарегистрированы?</p>
           <Link to="sign-in" className="auth__link">Войти</Link>
         </div>
       </div>

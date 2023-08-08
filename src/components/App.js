@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate, BrowserRouter } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 
 import likeIcon from "../images/like-icon.svg";
 import trashIcon from "../images/trash-icon.svg";
@@ -156,6 +156,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setImagePopupOpen(false);
+    setTooltipOpen(false);
   }
 
   // регистрация пользователя
@@ -181,7 +182,8 @@ function App() {
           localStorage.setItem("jwt", res.token);
           setEmail(email);
           setIsLoggedIn(true);
-          navigate("/", { replace: true });
+
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -205,17 +207,17 @@ function App() {
           <Route
             path="/"
             element={
-              <ProtectedRoute loggedIn={isLoggedIn}>
-                <Main
-                  onEditAvatar={handleEditAvatarClick}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
-                  cards={cards}
-                />{" "}
-              </ProtectedRoute>
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                element={Main}
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+                cards={cards}
+              />
             }
           />
 
@@ -273,31 +275,12 @@ function App() {
           card={selectedCard}
         />
 
+        {/* попап успешной или неуспешной регистрации */}
         <InfoTooltip
           isOpen={tooltipOpen}
           onClose={closeAllPopups}
           status={status}
         />
-
-        <template id="cardTamplate" className="element__tamplate">
-          <li className="element">
-            <img className="element__image" src="#" alt="#" />
-            <h2 className="element__title"></h2>
-            <div className="element__like-field">
-              <button type="button" className="element__like-button">
-                <img src={likeIcon} className="element__like-icon" alt="Лайк" />
-              </button>
-              <div className="element__like-count"></div>
-            </div>
-            <button type="button" className="element__delite-button">
-              <img
-                src={trashIcon}
-                className="element__delite-icon"
-                alt="Удалить"
-              />
-            </button>
-          </li>
-        </template>
       </div>
     </CurrentUserContext.Provider>
   );

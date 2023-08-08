@@ -6,14 +6,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function InfoTooltip(props) {
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   function redirectPopup() {
     if (props.status) {
       props.onClose();
 
       if (location.pathname === "/sign-up") {
-        history("/sign-in", { replace: true });
+        navigate("/sign-in");
       }
     }
     props.onClose();
@@ -24,8 +24,8 @@ function InfoTooltip(props) {
       id={props.id}
       className={`popup ${props.isOpen ? "popup_opened" : ""}`}
     >
-      <div className="popup__container">
-        <button type="button" className="popup__close" onClick={props.onClose}>
+      <div className="popup__auth-containet">
+        <button type="button" className="popup__close" onClick={redirectPopup}>
           <img className="popup__close-icon" src={closeIcon} alt="Закрыть" />
         </button>
 

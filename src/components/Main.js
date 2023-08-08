@@ -12,7 +12,7 @@ function Main(props) {
   const profInfo = useContext(CurrentUserContext);
 
   return (
-    <>
+    <main>
       <div className="profile">
         <div className="profile__avatar">
           <img src={profInfo.avatar} className="profile__photo" alt="Аватар" />
@@ -64,7 +64,7 @@ function Main(props) {
       </div>
 
       <div className="elements"></div>
-    </>
+    </main>
   );
 }
 
